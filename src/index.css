@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+
+
+  color-scheme: light dark;
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.text {
+  font-size: 17px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(241, 241, 241, 0);
+  margin: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-gray-400);
+  border-radius: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-300);
+}
+
+/*.earth_background {*/
+/*  animation: var(--animate-spin);*/
+/*  animation-duration: 30s;*/
+/*}*/
+
+/*@keyframes spin {*/
+/*  to {*/
+/*    transform: rotate(360deg);*/
+/*  }*/
+/*}*/
+
+.earth-sprite {
+    width: 18rem;
+    height: 18rem;
+    background: url("src/assets/sprite_earth_background.png") 0 0 no-repeat;
+    background-size: auto 10368px;
+    image-rendering: optimizeQuality;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: crisp-edges;
+    animation: fake_spin 3s steps(36) infinite;
+}
+
+@keyframes fake_spin {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -10368px;
+    }
+}
