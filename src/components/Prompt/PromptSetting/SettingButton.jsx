@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SettingIcon } from './SettingIcons.jsx';
-import { useSettingContext }  from '../context/SettingContext.jsx';
+import { useSettingContext }  from '../../../context/SettingContext.jsx';
 
 const SettingButton = () => {
     const { setOpen } = useSettingContext();

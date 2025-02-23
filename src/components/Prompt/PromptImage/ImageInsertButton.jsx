@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ImageIcon, ImageInsertedIcon } from './ImageIcons.jsx';
-import { useImageContext }  from '../context/ImageContext.jsx';
+import { useImageContext }  from '../../../context/ImageContext.jsx';
 
 const ImageInsertButton = React.memo(() => {
     const { images, open, setOpen } = useImageContext();
@@ -48,7 +48,7 @@ const ImageInsertButton = React.memo(() => {
                         isHovered ? 'w-40 duration-500 delay-400' : 'w-0 delay-200 duration-200'
                     }`}
                 >
-                    {!images.length ? 'Insert Images' : 'Added ' + images.length + ' Image' + (images.length > 1 ? 's' : '')}
+                    {!images.length ? 'Insert Images' : 'Added ' + images.length + ' PromptImage' + (images.length > 1 ? 's' : '')}
                 </div>
             </button>
         </span> 

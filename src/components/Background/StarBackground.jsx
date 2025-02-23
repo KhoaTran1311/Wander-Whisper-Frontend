@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import EarthLoading from "./EarthLoading.jsx";
+import EarthLoading from "../Loading/EarthLoading.jsx";
 
 const StarBackground = ({ loading }) => {
 

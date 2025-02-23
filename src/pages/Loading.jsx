@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import StarBackground from "../components/StarBackground.jsx";
+import StarBackground from "../components/Background/StarBackground.jsx";
 
 
 function AnimatedDots() {

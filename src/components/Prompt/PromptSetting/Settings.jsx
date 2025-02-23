@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useSettingContext } from '../context/SettingContext';
-import { CloseIcon } from './NavIcons.jsx';
+import { useSettingContext } from '../../../context/SettingContext.jsx';
+import { CloseIcon } from '../../Navigation/NavIcons.jsx';
 
 const Settings = () => {
     const { settings, open, setOpen } = useSettingContext();

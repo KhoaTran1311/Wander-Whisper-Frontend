@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "../../node_modules/tailwindcss";
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -69,7 +69,7 @@
 .earth-sprite {
     width: 18rem;
     height: 18rem;
-    background: url("src/assets/sprite_earth_background.png") 0 0 no-repeat;
+    background: url("../assets/backgrounds/earth/sprite_earth_background.png") 0 0 no-repeat;
     background-size: auto 10368px;
     image-rendering: optimizeQuality;
     image-rendering: -webkit-crisp-edges;

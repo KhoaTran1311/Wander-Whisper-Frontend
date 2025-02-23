@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TrashIcon } from './ImageIcons.jsx';
-import { useImageContext }  from '../context/ImageContext.jsx';
+import { useImageContext }  from '../../../context/ImageContext.jsx';
 
 const ImageViewer = () => {
     const { images, setImages } = useImageContext();

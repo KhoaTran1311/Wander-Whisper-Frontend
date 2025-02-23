@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import ImageInsertButton from "./ImageInsertButton.jsx";
-import SettingButton from "./SettingButton.jsx";
+import ImageInsertButton from "../PromptImage/ImageInsertButton.jsx";
+import SettingButton from "../PromptSetting/SettingButton.jsx";
 import {Link} from "react-router-dom";
 
 const SearchForm = () => {

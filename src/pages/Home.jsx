@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchForm from "../components/SearchForm.jsx";
-import WanderWhisperLogo from '../assets/wander_whisper_logo.svg';
-import StarBackground from "../components/StarBackground.jsx";
-import ImageInsertForm from '../components/ImageInsertForm.jsx';
+import SearchForm from "../components/Prompt/Search/SearchForm.jsx";
+import WanderWhisperLogo from '../assets/icons/wander_whisper_logo.svg';
+import StarBackground from "../components/Background/StarBackground.jsx";
+import ImageInsertForm from '../components/Prompt/PromptImage/ImageInsertForm.jsx';
 import { ImageProvider } from '../context/ImageContext.jsx';
 import { SettingProvider } from '../context/SettingContext.jsx';
-import Settings from "../components/Settings.jsx";
+import Settings from "../components/Prompt/PromptSetting/Settings.jsx";
 
 
 const Home = () => {

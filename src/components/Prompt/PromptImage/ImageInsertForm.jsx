@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useImageContext }  from '../context/ImageContext.jsx';
-import { CloseIcon } from './NavIcons.jsx';
+import { useImageContext }  from '../../../context/ImageContext.jsx';
+import { CloseIcon } from '../../Navigation/NavIcons.jsx';
 import ImageViewer from './ImageViewer.jsx';
 import { ImagePlusIcon } from './ImageIcons.jsx';
 
