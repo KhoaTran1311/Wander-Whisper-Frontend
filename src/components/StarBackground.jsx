@@ -2,22 +2,9 @@ import React, {useEffect, useMemo, useState} from 'react';
 import EarthLoading from "./EarthLoading.jsx";
 
 const StarBackground = ({ loading }) => {
-    const [frame, setFrame] = useState(0);
-    // const totalFrames = 36;
-
-    // useEffect(() => {
-    //     if (!loading) return;
-    //
-    //     const interval = setInterval(() => {
-    //         setFrame((prevFrame) => (prevFrame + 1) % totalFrames);
-    //     }, 150);
-    //
-    //     return () => clearInterval(interval);
-    // }, [loading]);
 
     const initialState = useMemo(() => {
-        setFrame(parseInt(Math.random() * 36));
-        return Array.from({ length: 300 }, () => ({
+        return Array.from({ length: 100 }, () => ({
             xPos : (Math.random() * 4 - 1.5) * 100,
             yPos : (Math.random() * 2 - 0.5) * 100,
             size : Math.random() * 0.5 + 0.1,
@@ -25,13 +12,9 @@ const StarBackground = ({ loading }) => {
     }, []);
 
     return (
-        <div className={`fixed overflow-hidden h-screen w-screen z-[-5] bg-gray-950 top-0 left-0 blur-sm`}>
+        <div className={`fixed overflow-hidden h-screen w-screen z-[-5] bg-zinc-950 top-0 left-0 select-none cursor-default blur-sm`}>
             {loading ? (
                 <div>
-                    {/*<img*/}
-                    {/*    className="absolute aspect-square earth_background h-72 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"*/}
-                    {/*    src={`src/assets/earth_background_small/frame_${frame}_small.png`}*/}
-                    {/*    alt="Earth background"/>*/}
                     <div className="absolute aspect-square h-72 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <EarthLoading/>
                     </div>
@@ -45,7 +28,7 @@ const StarBackground = ({ loading }) => {
                         top-1/2 xl:top-1/3 lg:top-2/5
                         aspect-square absolute
                         earth_background"
-                    src={`src/assets/earth_background_small/frame_${frame}_small.png`}
+                    src={`src/assets/earth_background_small/frame_1_small.png`}
                     alt="Earth background"/>
             )}
 

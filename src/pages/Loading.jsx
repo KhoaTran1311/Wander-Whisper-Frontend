@@ -45,7 +45,7 @@ function AnimatedDots() {
             {[0, 2, 4].map(offset => (
                 <div
                     key={offset}
-                    className="absolute text-5xl font-bold overscroll-none overflow-hidden text-gray-300"
+                    className="absolute text-5xl font-bold overscroll-none overflow-hidden text-zinc-300"
                     style={{
                         left: positions[(step + offset) % positions.length].x,
                         top: positions[(step + offset) % positions.length].y,
@@ -64,7 +64,7 @@ const Loading = () => {
     return (
         <div className="h-screen">
             <div className="max-w-5xl w-full mx-auto w-full h-full">
-                <div className="absolute text-5xl font-bold pl-8 text-gray-300"
+                <div className="absolute text-5xl font-bold pl-8 text-zinc-300"
                      style={{top: '50%', left: '0%', transform: 'translate(0%, -50%)'}}>
                 Loading
                 </div>
