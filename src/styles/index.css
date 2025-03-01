@@ -1,163 +1,103 @@
 @import "../../node_modules/tailwindcss";
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 500;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 500;
 
+	color-scheme: light dark;
+    background-color: var(--color-zinc-950);
 
-  color-scheme: light dark;
-
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .text {
-  font-size: 17px;
+	font-size: 17px;
 }
 
-
 .custom-v-scrollbar::-webkit-scrollbar {
-  width: 6px;
+	width: 6px;
 }
 
 .custom-v-scrollbar::-webkit-scrollbar-track {
-  background: rgba(241, 241, 241, 0);
-  margin: 2px;
+	background: rgba(241, 241, 241, 0);
+	margin: 2px;
 }
 
 .custom-v-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--color-zinc-400);
-  border-radius: 6px;
+	background: var(--color-zinc-400);
+	border-radius: 6px;
 }
 
 .custom-v-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--color-zinc-300);
+	background: var(--color-zinc-300);
 }
 
 .custom-h-scrollbar::-webkit-scrollbar {
-  height: 6px;
+	height: 6px;
 }
 
 .custom-h-scrollbar::-webkit-scrollbar-track {
-  background: rgba(241, 241, 241, 0);
-  margin: 4px;
+	background: rgba(241, 241, 241, 0);
+	margin: 4px;
 }
 
 .custom-h-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--color-zinc-400);
-  border-radius: 6px;
+	background: var(--color-zinc-400);
+	border-radius: 6px;
 }
 
 .custom-h-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--color-zinc-300);
+	background: var(--color-zinc-300);
 }
 
-.blended-box {
-  background-color: rgba(255, 255, 255, 0.1); /* Adjust the color and opacity to match your background */
-  border-radius: 15px; /* Rounded corners */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for blending */
-  backdrop-filter: blur(10px); /* Optional: adds a blur effect to the background */
-  padding: 20px;
-  margin: 20px;
-}
-
-
-.earth-sprite {
-    width: 18rem;
-    height: 18rem;
-    background: url("../assets/backgrounds/earth/sprite_earth_background.png") 0 0 no-repeat;
-    background-size: auto 10368px;
-    image-rendering: optimizeQuality;
-    image-rendering: -webkit-crisp-edges;
-    image-rendering: crisp-edges;
-    animation: fake_spin 3s steps(36) infinite;
-}
-
-@keyframes fake_spin {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 0 -10368px;
-    }
-}
 
 ::-moz-selection {
-  background: var(--color-zinc-200);
-  color: var(--color-zinc-700);
-}
-::-webkit-selection {
-  background: var(--color-zinc-200);
-  color: var(--color-zinc-700);
-}
-::selection {
-  background: var(--color-zinc-200);
-  color: var(--color-zinc-700);
+	background: var(--color-zinc-200);
+	color: var(--color-zinc-700);
 }
 
-/* 
-input[type='range'] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
+::-webkit-selection {
+	background: var(--color-zinc-200);
+	color: var(--color-zinc-700);
 }
-input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 20px;
-  width: 10px;
-  background: #cccccc;
-  border-radius: 30%;
-  cursor: pointer;
+
+::selection {
+	background: var(--color-zinc-200);
+	color: var(--color-zinc-700);
 }
-input[type='range']::-moz-range-thumb {
-  height: 20px;
-  width: 20px;
-  background: #cccccc;
-  border-radius: 30%;
-  cursor: pointer;
-  border: 2px solid #ffffff;
-}
-input[type='range']::-webkit-slider-runnable-track {
-  height: 4px;
-  background: transparent;
-}
-input[type='range']::-moz-range-track {
-  height: 4px;
-  background: transparent;
-}  */
 
 .range-input {
-  @apply appearance-none w-full;
+	@apply appearance-none w-full;
 }
 
 .range-input::-webkit-slider-runnable-track {
-  @apply bg-zinc-800/0;
+	@apply bg-zinc-800/0;
 }
 
 .range-input::-webkit-slider-thumb {
-  @apply appearance-none w-2 h-4 bg-zinc-500 mt-1.5 rounded-full cursor-pointer;
+	@apply appearance-none w-2 h-4 bg-zinc-500 mt-1.5 rounded-full cursor-pointer;
 }
 
 .range-input::-moz-range-track {
-  @apply bg-zinc-800/0;
+	@apply bg-zinc-800/0;
 }
 
 .range-input::-moz-range-thumb {
-  @apply appearance-none w-2 h-4 bg-zinc-500 mt-1.5 rounded-full cursor-pointer;
+	@apply appearance-none w-2 h-4 bg-zinc-500 mt-1.5 rounded-full cursor-pointer;
 }
-  
+
 
 .range-input::-ms-track {
-  @apply bg-zinc-800/0;
-  border-color: transparent;
-  color: transparent;
+	@apply bg-zinc-800/0;
+	border-color: transparent;
+	color: transparent;
 }
 
 .range-input::-ms-thumb {
-  @apply w-2 h-4 bg-zinc-600 mt-1.5 rounded-full cursor-pointer;
+	@apply w-2 h-4 bg-zinc-600 mt-1.5 rounded-full cursor-pointer;
 }
     

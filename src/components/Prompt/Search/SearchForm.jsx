@@ -1,16 +1,18 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from "react";
 import ImageInsertButton from "../PromptImage/ImageInsertButton.jsx";
 import SettingButton from "../PromptSetting/SettingButton.jsx";
-import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {useAppContext} from "../../../context/AppContext.jsx";
 
 const SearchForm = () => {
-    const [prompt, setPrompt] = useState("");
+    const navigate = useNavigate();
+    const { prompt, setPrompt } = useAppContext();
     const textareaRef = useRef(null);
 
     const adjustTextareaHeight = (textarea) => {
         // auto increase text area height
-        textarea.style.height = 'auto';
-        textarea.style.height = (textarea.scrollHeight) + 'px';
+        textarea.style.height = "auto";
+        textarea.style.height = (textarea.scrollHeight) + "px";
     };
 
     const handlePromptChange = (event) => {
@@ -29,46 +31,48 @@ const SearchForm = () => {
         if (textareaRef.current) {
             textareaRef.current.textContent = "";
         }
+        navigate("/r");
+    }
+
+    const handleOnKeyDown = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            handleSubmit(e);
+        } else if (e.key === "Enter" && e.shiftKey) {
+            //allow default behavior of new line insertion
+        }
     }
 
     useEffect(() => {
-        // auto focus on text area
         textareaRef.current?.focus();
     }, []);
 
 
     return (
-        <form className="bg-zinc-700/70 backdrop-blur-2xl p-3 pb-1 rounded-3xl w-full text-left" 
+        <form className="bg-zinc-700/50 backdrop-blur-2xl p-3 pb-1 rounded-3xl w-full text-left"
             onSubmit={handleSubmit}
         >
             <textarea
                 className="text relative flex m-2 pr-4 items-starts pl-1 focus:outline-none min-h-12 min-w-0 max-h-[25dvh]
                             w-full overflow-x-clip overflow-y-auto caret-zinc-50 align-bottom appearance-auto custom-v-scrollbar text-zinc-50"
                 value={prompt}
-                style={{ resize: 'none' }}
+                style={{ resize: "none" }}
                 ref={textareaRef}
                 onChange={handlePromptChange}
+                onKeyDown={handleOnKeyDown}
                 placeholder={"Describe your ideal trip..."}
             />
             <div className="flex mb-2 mt-1 items-center justify-between h-fit">
-                <div className='flex flex-row gap-2'>
+                <div className="flex flex-row gap-2">
                     <SettingButton/>
                     <ImageInsertButton/>
                 </div>
-                <div className="flex">
-                    <button
-                        type="submit"
-                        disabled={!prompt}
-                        className="flex h-11 px-4 items-center justify-center bg-zinc-50 text-zinc-950 rounded-full transition-colors select-none cursor-default hover:opacity-70 disabled:hover:opacity-100 focus-visible:outline-none focus-visible:outline-white disabled:bg-zinc-500 disable:hover:opacity-100 cursor-pointer"
-                    >
-                        <Link
-                            to='/l'
-                        >
-                            Let&#39;s Go!
-                        </Link>
-                    </button>
-
-                </div>
+                <button
+                    type="submit"
+                    disabled={!prompt}
+                    className="flex h-11 px-4 items-center justify-center bg-zinc-50 text-zinc-950 rounded-full transition-colors select-none cursor-default hover:opacity-70 disabled:hover:opacity-100 focus-visible:outline-none focus-visible:outline-white disabled:bg-zinc-500 disable:hover:opacity-100 cursor-pointer"
+                >
+                    Let&#39;s Go!
+                </button>
             </div>
         </form>
     );

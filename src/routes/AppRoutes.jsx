@@ -1,19 +1,24 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home';
-import Loading from "../pages/Loading.jsx";
-// import NotFound from '../pages/NotFound';
-// import Results from "../pages/Results.tsx";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "../pages/Home";
+import Loading from "../components/Loading/Loading.jsx";
+import Results from "../pages/Results.jsx";
+import {AppProvider} from "../context/AppContext.jsx";
+
 
 const AppRoutes = () => {
     return (
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/l" element={<Loading/>} />
-            {/*<Route path="*" element={<NotFound />} />*/}
-            {/*<Route path="/r" element={<Results />} />*/}
-        </Routes>
+        <AppProvider>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/l" element={<Loading/>} />
+                <Route path="/r" element={<Results/>} />
+            </Routes>
+        </AppProvider>
     );
 };
 
 export default AppRoutes;
+
+// TODO: Not found page
+{/*<Route path="*" element={<NotFound />} />*/}

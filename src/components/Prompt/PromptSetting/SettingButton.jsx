@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
-import { SettingIcon } from './SettingIcons.jsx';
-import { useSettingContext }  from '../../../context/SettingContext.jsx';
+import React from "react";
+import { SettingIcon } from "./SettingIcons.jsx";
+import {useHomeContext} from "../../../context/HomeContext.jsx";
 
 const SettingButton = () => {
-    const { setOpen } = useSettingContext();
-
-    const handleImageInsertClick = () => {
-        setOpen(true);
-    }
+    const { setOpenSettings } = useHomeContext();
 
     return (
         <div className="relative group">
             <button
                 className={`h-11 w-11 pl-[9px] text-zinc-400 rounded-full border-zinc-600 border cursor-pointer duration-200 active:bg-zinc-500 hover:bg-zinc-600`}
                 type="button"
-                onClick={handleImageInsertClick}
+                onClick={() => setOpenSettings(true)}
             >
                 <SettingIcon/>
             </button>
