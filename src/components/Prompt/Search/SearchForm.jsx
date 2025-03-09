@@ -6,7 +6,7 @@ import {useAppContext} from "../../../context/AppContext.jsx";
 
 const SearchForm = () => {
     const navigate = useNavigate();
-    const { prompt, setPrompt } = useAppContext();
+    const { prompt, setPrompt, resetMedia } = useAppContext();
     const textareaRef = useRef(null);
 
     const adjustTextareaHeight = (textarea) => {
@@ -27,7 +27,7 @@ const SearchForm = () => {
         if (!prompt)
             return
         console.log(prompt); // TODO: link to backend`11
-        setPrompt("");
+        resetMedia();
         if (textareaRef.current) {
             textareaRef.current.textContent = "";
         }

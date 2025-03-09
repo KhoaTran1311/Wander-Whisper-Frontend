@@ -26,12 +26,22 @@ export function AppProvider({ children }) {
         const longitude = position.coords.longitude;
         setLocation({ lat:latitude, lng:longitude });
     }
+
     const getLocError = () => {
         console.log("Unable to retrieve your location");
     }
 
+    const resetMedia = () => {
+        setImages([]);
+        setPrompt("")
+        setSettings({
+            alpha: 0.5,
+            maxResults: 10,
+        })
+    }
+
     return (
-        <AppContext.Provider value={{ images, setImages, settings, setSettings, prompt, setPrompt, location, setLocation }}>
+        <AppContext.Provider value={{ images, setImages, settings, setSettings, prompt, setPrompt, location, setLocation, resetMedia }}>
             {children}
         </AppContext.Provider>
     );

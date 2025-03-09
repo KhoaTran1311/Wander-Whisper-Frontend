@@ -37,7 +37,13 @@ const Settings = () => {
                             <label className="flex justify-between font-medium mb-1 cursor-default select-none">
                                 Alpha
                             </label>
-                            <button className={"font-medium text-[10px] border rounded-full h-4 w-4 font-mono text-zinc-400 active:text-zinc-300"}>i</button>
+                            <div className="relative">
+                                <div className="peer flex items-center justify-center font-medium text-[10px] border rounded-full h-4 w-4 font-mono text-zinc-400 hover:text-zinc-300 cursor-default select-none">i</div>
+                                <div className="absolute bg-zinc-300 text-black text-xs rounded mt-3 py-1 px-2 z-50 shadow-md opacity-0 peer-hover:opacity-100 transition-opacity -right-3 whitespace-normal sm:whitespace-nowrap">
+                                    The higher the alpha, the more images is prioritized over the text when searching
+                                    <div className="absolute right-3 -top-1 transform -translate-x-1/2 w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-b-4 border-b-zinc-300"/>
+                                </div>
+                            </div>
                         </div>
                         <div className="relative">
                             <input
@@ -81,15 +87,15 @@ const Settings = () => {
                                 Number of Results
                             </label>
                             <p className="text-xs text-zinc-500">
-                                Number of destinations to seek
+                                Number of cities to search
                             </p>
                         </div>
                         <div
-                            className="flex items-center bg-zinc-300/10 rounded-md  overflow-hidden shadow-xl inset-shadow-sm inset-shadow-zinc-400/50">
+                            className="flex items-center bg-zinc-300/10 rounded-md overflow-hidden shadow-xl inset-shadow-sm inset-shadow-zinc-400/50">
                             <button
                                 disabled={settings.maxResults <= 1}
                                 onClick={() => setSettings((p) => ({...p, maxResults: p.maxResults - 1}))}
-                                className="p-2 px-3 h-full cursor-pointer text-zinc-300 disabled:cursor-not-allowed"
+                                className="p-2 sm:px-3 h-full cursor-pointer text-zinc-300 disabled:cursor-not-allowed"
                             >
                                 -
                             </button>
@@ -97,11 +103,11 @@ const Settings = () => {
                                 type="text"
                                 value={settings.maxResults}
                                 onChange={handleNumberOfResultsChange}
-                                className="w-10 text-center outline-none"
+                                className="sm:w-10 w-8 text-center outline-none"
                             />
                             <button
                                 onClick={() => setSettings((p) => ({...p, maxResults: p.maxResults + 1}))}
-                                className="p-2 px-3 h-full cursor-pointer text-zinc-300"
+                                className="p-2 sm:px-3 h-full cursor-pointer text-zinc-300"
                             >
                                 +
                             </button>
