@@ -37,9 +37,7 @@ const SearchForm = () => {
     const handleOnKeyDown = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
             handleSubmit(e);
-        } else if (e.key === "Enter" && e.shiftKey) {
-            //allow default behavior of new line insertion
-        }
+        } 
     }
 
     useEffect(() => {

@@ -19,10 +19,10 @@ const Settings = () => {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`flex flex-col bg-zinc-900 border border-zinc-700 h-fill w-104 sm:w-124 md:w-160 rounded-3xl p-6 gap-3 shadow-xl`}
+                className={`flex flex-col bg-zinc-900 border border-zinc-700/30 h-fill w-104 sm:w-124 md:w-160 rounded-2xl p-6 gap-3 shadow-xl text-white `}
             >
                 <div className="flex flex-row justify-between pb-3">
-                    <h1 className="text-2xl select-none cursor-default">
+                    <h1 className="text-2xl font-bold select-none cursor-default">
                         Settings
                     </h1>
                     <button onClick={() => setOpenSettings(false)}
@@ -31,7 +31,7 @@ const Settings = () => {
                     </button>
                 </div>
                 <div
-                    className="flex flex-col divide-y-1 divide-zinc-800 p-3 border border-xl border-zinc-600 rounded-lg">
+                    className="flex flex-col divide-y-1 divide-zinc-800 p-3 border border-xl border-zinc-600/30 rounded-lg">
                     <div className="pb-3">
                         <div className="flex flex-row justify-between">
                             <label className="flex justify-between font-medium mb-1 cursor-default select-none">
@@ -85,7 +85,7 @@ const Settings = () => {
                             </p>
                         </div>
                         <div
-                            className="flex items-center bg-zinc-600 rounded-md  overflow-hidden shadow-xl inset-shadow-sm inset-shadow-zinc-400/50">
+                            className="flex items-center bg-zinc-300/10 rounded-md  overflow-hidden shadow-xl inset-shadow-sm inset-shadow-zinc-400/50">
                             <button
                                 disabled={settings.maxResults <= 1}
                                 onClick={() => setSettings((p) => ({...p, maxResults: p.maxResults - 1}))}

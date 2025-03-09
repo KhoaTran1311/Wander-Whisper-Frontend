@@ -8,7 +8,7 @@ const ResultsBanner = () => {
 
     return (
         <div
-            className="bg-zinc-800/30 w-132 max-h-[80vh] absolute right-0 top-1/2 -translate-y-1/2 mr-16 rounded-xl shadow-xl backdrop-blur-md p-6 border border-zinc-700/30 overflow-auto select-none"
+            className="bg-zinc-800/30 w-132 max-h-[80vh] absolute right-0 top-1/2 -translate-y-1/2 mr-16 rounded-2xl shadow-xl backdrop-blur-md p-6 border border-zinc-700/30 overflow-auto select-none"
         >
             {!chosenCity ? (
                 <>
