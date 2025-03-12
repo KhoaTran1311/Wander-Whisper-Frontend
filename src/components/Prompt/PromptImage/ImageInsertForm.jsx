@@ -43,7 +43,10 @@ const ImageInsertForm = () => {
 							<h1 className="text-2xl font-bold text-white select-none cursor-default">
 								Images
 							</h1>
-							<button onClick={() => setOpenImageInsert(false)} className="text-zinc-300 cursor-pointer hover:text-zinc-50 hover:scale-115 active:scale-120 active:bg-zinc-700 transition-transform rounded-full">
+							<button 
+								onClick={() => setOpenImageInsert(false)} 
+								className="text-zinc-300 cursor-pointer hover:text-zinc-50 hover:scale-115 active:scale-120 transition-transform"
+							>
 								<CloseIcon/>
 							</button>
 						</div>

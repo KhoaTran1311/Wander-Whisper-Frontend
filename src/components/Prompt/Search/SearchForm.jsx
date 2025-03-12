@@ -46,7 +46,7 @@ const SearchForm = () => {
 
 
     return (
-        <form className="bg-zinc-700/50 backdrop-blur-2xl p-3 pb-1 rounded-3xl w-full text-left"
+        <form className="bg-zinc-700/50 backdrop-blur-2xl p-3 pb-1 rounded-3xl w-full text-left shadow-lg"
             onSubmit={handleSubmit}
         >
             <textarea
