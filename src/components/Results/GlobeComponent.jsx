@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState} from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Globe from 'react-globe.gl';
 import {
     MeshPhongMaterial,
@@ -10,10 +10,9 @@ import {
     MeshBasicMaterial
 } from 'three';
 import countries from '../../data/globe.json';
-import pointsData from '../../data/results_test.json';
 import Loading from "../Loading/Loading.jsx";
-import {useAppContext} from "../../context/AppContext.jsx";
-import {useResultsContext} from "../../context/ResultsContext.jsx";
+import { useAppContext } from "../../context/AppContext.jsx";
+import { useResultsContext } from "../../context/ResultsContext.jsx";
 import stars from '../../assets/backgrounds/stars/stars_3D.json';
 
 const min = 1000;
@@ -21,10 +20,10 @@ const max = 4000;
 
 const GlobeComponent = ({ width, height }) => {
     const { chosenCity } = useResultsContext();
-    const { location } = useAppContext();
+    const { location, pointsData } = useAppContext();
     const globeRef = useRef(null);
     const mountedRef = useRef(false);
-    const [isInitialized, setIsInitialized] = useState(false);
+    const [ isInitialized, setIsInitialized ] = useState(false);
 
     const home = useMemo(() => ({
         lat: location.lat,

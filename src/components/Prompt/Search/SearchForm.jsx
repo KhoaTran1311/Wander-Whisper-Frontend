@@ -2,11 +2,11 @@ import React, {useEffect, useRef} from "react";
 import ImageInsertButton from "../PromptImage/ImageInsertButton.jsx";
 import SettingButton from "../PromptSetting/SettingButton.jsx";
 import { useNavigate } from "react-router-dom";
-import {useAppContext} from "../../../context/AppContext.jsx";
+import { useAppContext } from "../../../context/AppContext.jsx";
 
 const SearchForm = () => {
     const navigate = useNavigate();
-    const { prompt, setPrompt, resetMedia } = useAppContext();
+    const { prompt, setPrompt, resetMedia, images, setIsLoading, setPointsData } = useAppContext();
     const textareaRef = useRef(null);
 
     const adjustTextareaHeight = (textarea) => {
@@ -22,12 +22,52 @@ const SearchForm = () => {
         }
     };
 
+    const fetchData = async () => {
+        try {
+            setIsLoading(true)
+            const res = await fetch("http://127.0.0.1:8000/api/find_recommended_cities/");
+            const data = await res.json();
+            setPointsData(data)
+            setIsLoading(false)
+        } catch (error) {
+            console.error("Error fetching data: ", error)
+        }
+    }
+
+    const uploadMedia = async () => {
+        try {
+            // TODO: add image and alpha beta
+            if (prompt) {
+                const promptData = { prompt };
+    
+                const promptResponse = await fetch("http://127.0.0.1:8000/api/upload_prompt/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(promptData),
+                });
+    
+                const promptDataResponse = await promptResponse.json();
+                if (!promptResponse.ok) {
+                    console.error("Prompt submission error:", promptDataResponse.error);
+                    return;
+                }
+                console.log(promptDataResponse.success); 
+            }
+        } catch (error) {
+            console.error("Error during submission:", error);
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!prompt)
+        if (!prompt && images.length === 0)
             return
-        console.log(prompt); // TODO: link to backend`11
-        resetMedia();
+
+        uploadMedia()
+        fetchData()
+        resetMedia()
         if (textareaRef.current) {
             textareaRef.current.textContent = "";
         }
@@ -66,7 +106,7 @@ const SearchForm = () => {
                 </div>
                 <button
                     type="submit"
-                    disabled={!prompt}
+                    disabled={!prompt && images.length === 0}
                     className="flex h-11 px-4 items-center justify-center bg-zinc-50 text-zinc-950 rounded-full transition-colors select-none cursor-default hover:opacity-70 disabled:hover:opacity-100 focus-visible:outline-none focus-visible:outline-white disabled:bg-zinc-500 disable:hover:opacity-100 cursor-pointer"
                 >
                     Let&#39;s Go!

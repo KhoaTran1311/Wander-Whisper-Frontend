@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { ImageIcon, ImageInsertedIcon } from './ImageIcons.jsx';
-import {useHomeContext} from "../../../context/HomeContext.jsx";
-import {useAppContext} from "../../../context/AppContext.jsx";
+import { useHomeContext } from "../../../context/HomeContext.jsx";
+import { useAppContext } from "../../../context/AppContext.jsx";
 
 const ImageInsertButton = React.memo(() => {
     const { openImageInsert, setOpenImageInsert } = useHomeContext();
     const { images } = useAppContext();
-    const [isHovered, setIsHovered] = useState(false);
+    const [ isHovered, setIsHovered ] = useState(false);
 
 
     const calculateWidth = () => {
-        const baseWidth = 11; // base width when hovered
+        const baseWidth = 13; // base width when hovered
         let num;
 
         if ( images.length === 0 )

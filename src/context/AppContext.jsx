@@ -1,15 +1,17 @@
-import React, {createContext, useContext, useEffect, useState} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
-    const [images, setImages] = useState([]);
-    const [settings, setSettings] = useState({
+    const [ images, setImages ] = useState([]);
+    const [ settings, setSettings ] = useState({
         alpha: 0.5,
         maxResults: 10,
     });
-    const [prompt, setPrompt] = useState("");
-    const [location, setLocation] = React.useState({ lat: 0, lng: 0 });
+    const [ prompt, setPrompt ] = useState("");
+    const [ location, setLocation ] = React.useState({ lat: 0, lng: 0 });
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [ pointsData, setPointsData ] = useState([]);
 
     useEffect(() => {
         return () => {
@@ -41,7 +43,7 @@ export function AppProvider({ children }) {
     }
 
     return (
-        <AppContext.Provider value={{ images, setImages, settings, setSettings, prompt, setPrompt, location, setLocation, resetMedia }}>
+        <AppContext.Provider value={{ images, setImages, settings, setSettings, prompt, setPrompt, location, setLocation, resetMedia, isLoading, setIsLoading, pointsData, setPointsData }}>
             {children}
         </AppContext.Provider>
     );

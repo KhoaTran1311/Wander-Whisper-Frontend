@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CloseIcon } from "../../Navigation/NavIcons.jsx";
-import {useHomeContext} from "../../../context/HomeContext.jsx";
-import {useAppContext} from "../../../context/AppContext.jsx";
+import { useHomeContext } from "../../../context/HomeContext.jsx";
+import { useAppContext } from "../../../context/AppContext.jsx";
 
 const Settings = () => {
     const { openSettings, setOpenSettings } = useHomeContext();
@@ -51,9 +51,9 @@ const Settings = () => {
                             <div className="relative">
                                 <div
                                     onClick={(prev) => setOpenInfo(!openInfo)} 
-                                    className="peer flex items-center justify-center font-medium text-[10px] border rounded-full h-4 w-4 font-mono text-zinc-400 hover:text-zinc-300 cursor-pointer select-none"
+                                    className="flex justify-center font-medium text-[10px] border rounded-full h-4 w-4 font-mono text-zinc-400 hover:text-zinc-300 cursor-pointer select-none"
                                 >
-                                    i
+                                    <span className="my-auto">i</span>
                                 </div>
                                 {
                                     openInfo && 

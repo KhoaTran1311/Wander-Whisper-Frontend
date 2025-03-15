@@ -1,10 +1,11 @@
 import React from "react";
-import pointsData from "../../data/results_test.json";
-import {useResultsContext} from "../../context/ResultsContext.jsx";
-import {BackIcon, LeftArrow, RightArrow} from "../Navigation/NavIcons.jsx";
+import { useResultsContext } from "../../context/ResultsContext.jsx";
+import { BackIcon, LeftArrow, RightArrow } from "../Navigation/NavIcons.jsx";
+import { useAppContext } from "../../context/AppContext.jsx";
 
 const ResultsBanner = () => {
     const { chosenCity, setChosenCity } = useResultsContext();
+    const { pointsData } = useAppContext();
 
     return (
         <div
