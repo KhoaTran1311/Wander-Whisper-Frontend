@@ -6,7 +6,7 @@ import { useAppContext } from "../../../context/AppContext.jsx";
 
 const SearchForm = () => {
     const navigate = useNavigate();
-    const { prompt, setPrompt, resetMedia, images, setIsLoading, setPointsData } = useAppContext();
+    const { prompt, settings, setPrompt, resetMedia, images, setIsLoading, setPointsData } = useAppContext();
     const textareaRef = useRef(null);
 
     const adjustTextareaHeight = (textarea) => {
@@ -34,10 +34,34 @@ const SearchForm = () => {
         }
     }
 
+    const uploadConfig = async () => {
+        try {
+            const configData = { alpha: settings.alpha, beta: 1-settings.alpha };
+            console.log(configData)
+    
+            const promptResponse = await fetch("http://127.0.0.1:8000/api/set_alpha_beta/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(configData),
+            });
+
+            const promptDataResponse = await promptResponse.json();
+            if (!promptResponse.ok) {
+                console.error("Prompt submission error:", promptDataResponse.error);
+                return;
+            }
+            console.log(promptDataResponse.success); 
+        } catch (error) {
+            console.error("Error during submission:", error);
+        }
+    }
+
     const uploadMedia = async () => {
         try {
             // TODO: add image and alpha beta
-            if (prompt) {
+            if (prompt || images) {
                 const promptData = { prompt };
     
                 const promptResponse = await fetch("http://127.0.0.1:8000/api/upload_prompt/", {
@@ -65,6 +89,7 @@ const SearchForm = () => {
         if (!prompt && images.length === 0)
             return
 
+        uploadConfig()
         uploadMedia()
         fetchData()
         resetMedia()
