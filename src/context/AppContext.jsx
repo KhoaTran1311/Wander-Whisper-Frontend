@@ -4,6 +4,7 @@ const AppContext = createContext();
 
 export function AppProvider({ children }) {
     const [ images, setImages ] = useState([]);
+    const [ imagePreviewUrls, setImagePreviewUrls ] = useState([]);
     const [ settings, setSettings ] = useState({
         alpha: 0.5,
         maxResults: 10,
@@ -35,6 +36,7 @@ export function AppProvider({ children }) {
 
     const resetMedia = () => {
         setImages([]);
+        setImagePreviewUrls([]);
         setPrompt("")
         setSettings({
             alpha: 0.5,
@@ -43,7 +45,7 @@ export function AppProvider({ children }) {
     }
 
     return (
-        <AppContext.Provider value={{ images, setImages, settings, setSettings, prompt, setPrompt, location, setLocation, resetMedia, isLoading, setIsLoading, pointsData, setPointsData }}>
+        <AppContext.Provider value={{ images, setImages, imagePreviewUrls, setImagePreviewUrls, settings, setSettings, prompt, setPrompt, location, setLocation, resetMedia, isLoading, setIsLoading, pointsData, setPointsData }}>
             {children}
         </AppContext.Provider>
     );

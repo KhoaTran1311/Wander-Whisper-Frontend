@@ -8,7 +8,7 @@ import Toast from '../../Toast/Toast.jsx';
 
 const ImageInsertForm = () => {
 	const { openImageInsert, setOpenImageInsert } = useHomeContext();
-    const { images, setImages } = useAppContext();
+    const { images, setImages, imagePreviewUrls, setImagePreviewUrls } = useAppContext();
 	const fileInputRef = useRef(null);
     const [ isDragOver, setIsDragOver ] = useState(false);
 	const [ numImgAdded, setNumImgAdded ] = useState(-1);
@@ -16,11 +16,12 @@ const ImageInsertForm = () => {
     const handleDrop = (event) => {
         event.preventDefault();
         const files = Array.from(event.dataTransfer.files);
-        const newImages = files.map(file => URL.createObjectURL(file));
-        setImages([...images, ...newImages]);
+        const filesUrls = files.map(file => URL.createObjectURL(file));
+        setImages([...images, ...files]);
+		setImagePreviewUrls([...imagePreviewUrls, ...filesUrls])
         setIsDragOver(false);
 		setOpenImageInsert(false);
-		setNumImgAdded(newImages.length);
+		setNumImgAdded(filesUrls.length);
     }
 
     const handleDragOver = (event) => {
@@ -69,10 +70,11 @@ const ImageInsertForm = () => {
 									className="hidden"
 									onChange={(event) => {
 										const files = Array.from(event.target.files);
-										const newImages = files.map(file => URL.createObjectURL(file));
-										setImages([...images, ...newImages]);
+										const filesUrls = files.map(file => URL.createObjectURL(file));
+										setImages([...images, ...files]);
+										setImagePreviewUrls([...imagePreviewUrls, ...filesUrls])
 										setOpenImageInsert(false);
-										setNumImgAdded(newImages.length);
+										setNumImgAdded(files.length);
 									}}
 									ref={fileInputRef}
 								/>

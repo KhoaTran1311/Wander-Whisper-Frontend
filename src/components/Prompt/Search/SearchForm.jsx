@@ -58,27 +58,49 @@ const SearchForm = () => {
         }
     }
 
-    const uploadMedia = async () => {
+    const uploadImages = async () => {
         try {
-            // TODO: add image and alpha beta
-            if (prompt || images) {
-                const promptData = { prompt };
+            if (!images || images.length === 0) return;
+            const formData = new FormData();
+            
+            images.forEach((image) => {
+                formData.append("image", image);
+            });
+
+            const promptResponse = await fetch("http://127.0.0.1:8000/api/upload_image/", {
+                method: "POST",
+                body: formData,
+            });
     
-                const promptResponse = await fetch("http://127.0.0.1:8000/api/upload_prompt/", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(promptData),
-                });
-    
-                const promptDataResponse = await promptResponse.json();
-                if (!promptResponse.ok) {
-                    console.error("Prompt submission error:", promptDataResponse.error);
-                    return;
-                }
-                console.log(promptDataResponse.success); 
+            const promptDataResponse = await promptResponse.json();
+            if (!promptResponse.ok) {
+                console.error("Prompt submission error:", promptDataResponse.error);
+                return;
             }
+            console.log(promptDataResponse.success); 
+        } catch (error) {
+            console.error("Error during submission:", error);
+        }
+    };
+
+    const uploadPrompt = async () => {
+        try {
+            const promptData = { prompt };
+
+            const promptResponse = await fetch("http://127.0.0.1:8000/api/upload_prompt/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(promptData),
+            });
+
+            const promptDataResponse = await promptResponse.json();
+            if (!promptResponse.ok) {
+                console.error("Prompt submission error:", promptDataResponse.error);
+                return;
+            }
+            console.log(promptDataResponse.success); 
         } catch (error) {
             console.error("Error during submission:", error);
         }
@@ -90,7 +112,12 @@ const SearchForm = () => {
             return
 
         uploadConfig()
-        uploadMedia()
+
+        if (images)
+            uploadImages()
+        if (prompt)
+            uploadPrompt()
+
         fetchData()
         resetMedia()
         if (textareaRef.current) {
