@@ -1,7 +1,13 @@
-import React from "react";
-import stars from "../../assets/backgrounds/stars/stars.json";
+import React, { useState, useEffect } from "react";
 
 const Stars = () => {
+    const [stars, setStars] = useState([]);
+    useEffect(() => {
+        fetch("/data/stars/stars.json")
+            .then((res) => res.json())
+            .then(setStars);
+    }, []);
+
     return (
         <svg
             className="fixed text-zinc-100 z-[-4] blur-sm"

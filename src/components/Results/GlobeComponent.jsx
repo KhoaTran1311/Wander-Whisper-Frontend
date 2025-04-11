@@ -9,11 +9,9 @@ import {
     SphereGeometry,
     MeshBasicMaterial
 } from 'three';
-import countries from '../../data/globe.json';
 import Loading from "../Loading/Loading.jsx";
 import { useAppContext } from "../../context/AppContext.jsx";
-import { useResultsContext } from "../../context/ResultsContext.jsx";
-import stars from '../../assets/backgrounds/stars/stars_3D.json';
+import { useResultsContext } from "../../context/ResultsContext.jsx"
 
 const min = 1000;
 const max = 4000;
@@ -24,6 +22,8 @@ const GlobeComponent = ({ width, height }) => {
     const globeRef = useRef(null);
     const mountedRef = useRef(false);
     const [ isInitialized, setIsInitialized ] = useState(false);
+    const [countries, setCountries] = useState([]);
+    const [stars, setStars] = useState([]);
 
     const home = useMemo(() => ({
         lat: location.lat,
@@ -67,6 +67,14 @@ const GlobeComponent = ({ width, height }) => {
 
     useEffect(() => {
         mountedRef.current = true;
+        fetch('/data/globe/globe.json')
+            .then((res) => res.json())
+            .then(setCountries);
+
+        fetch('/data/stars/stars_3D.json')
+            .then((res) => res.json())
+            .then(setStars);
+
         return () => {
             mountedRef.current = false;
         };
@@ -145,68 +153,72 @@ const GlobeComponent = ({ width, height }) => {
                     <Loading />
                 </div>
             )}
-            <Globe
-                ref={globeRef}
-                waitForGlobeReady={true}
-                animateIn={false}
-                onGlobeReady={globeReady}
-                globeOffset={[-300,0]}
-                width={width}
-                height={height}
-                backgroundColor={'rgb(9,9,11,0)'}
-                rendererConfig={{antialias: false, alpha: false}}
-                globeMaterial={
-                    new MeshPhongMaterial({
-                        color: '#0b1229',
-                        opacity: 1,
-                        transparent: false,
-                        emissive: '#0b1229',
-                        emissiveIntensity: 0,
-                        shininess: 0.0,
-                    })
-                }
-                ringsData={ringData}
-                ringMaxRadius={5}
-                ringColor={() => ringsColorFunc}
-                ringPropagationSpeed={2}
-                ringRepeatPeriod={300}
-                pointsMerge={false}
-                pointsData={dataPoints}
-                pointAltitude={0.005}
-                pointRadius={1.0}
-                pointResolution={3}
-                pointColor={(d) => {
-                    if (d.home_color) {
-                        return d.home_color;
+            {countries && stars.length ? (
+                <Globe
+                    ref={globeRef}
+                    waitForGlobeReady={true}
+                    animateIn={false}
+                    onGlobeReady={globeReady}
+                    globeOffset={[-300,0]}
+                    width={width}
+                    height={height}
+                    backgroundColor={'rgb(9,9,11,0)'}
+                    rendererConfig={{antialias: false, alpha: false}}
+                    globeMaterial={
+                        new MeshPhongMaterial({
+                            color: '#0b1229',
+                            opacity: 1,
+                            transparent: false,
+                            emissive: '#0b1229',
+                            emissiveIntensity: 0,
+                            shininess: 0.0,
+                        })
                     }
-                    if (chosenCity && d.city_id !== chosenCity.city_id){
-                        return 'rgb(35,35,35)';
-                    }
-                    return 'rgb(190,0,15)';
-                }}
-                arcsData={arcsData}
-                arcAltitudeAutoScale={0.3}
-                arcColor='color'
-                arcStroke={0.5}
-                arcDashGap={2}
-                arcDashAnimateTime='time'
-                showAtmosphere={true}
-                atmosphereColor={'#8ec5ff'}
-                atmosphereAltitude={0.2}
-                hexPolygonsData={countries.features}
-                hexPolygonResolution={3}
-                hexPolygonMargin={0.6}
-                hexPolygonColor={() => '#00bc7d'}
-                customLayerData={stars}
-                customThreeObject={(obj) => {
-                    const {size, color} = obj;
-                    return new Mesh(new SphereGeometry(size), new MeshBasicMaterial({color}));
-                }}
-                customThreeObjectUpdate={(obj, sliceData) => {
-                    const {lat, lng, altitude} = sliceData;
-                    return Object.assign(obj.position, globeRef.current?.getCoords(lat, lng, altitude));
-                }}
-            />
+                    ringsData={ringData}
+                    ringMaxRadius={5}
+                    ringColor={() => ringsColorFunc}
+                    ringPropagationSpeed={2}
+                    ringRepeatPeriod={300}
+                    pointsMerge={false}
+                    pointsData={dataPoints}
+                    pointAltitude={0.005}
+                    pointRadius={1.0}
+                    pointResolution={3}
+                    pointColor={(d) => {
+                        if (d.home_color) {
+                            return d.home_color;
+                        }
+                        if (chosenCity && d.city_id !== chosenCity.city_id){
+                            return 'rgb(35,35,35)';
+                        }
+                        return 'rgb(190,0,15)';
+                    }}
+                    arcsData={arcsData}
+                    arcAltitudeAutoScale={0.3}
+                    arcColor='color'
+                    arcStroke={0.5}
+                    arcDashGap={2}
+                    arcDashAnimateTime='time'
+                    showAtmosphere={true}
+                    atmosphereColor={'#8ec5ff'}
+                    atmosphereAltitude={0.2}
+                    hexPolygonsData={countries.features}
+                    hexPolygonResolution={3}
+                    hexPolygonMargin={0.6}
+                    hexPolygonColor={() => '#00bc7d'}
+                    customLayerData={stars}
+                    customThreeObject={(obj) => {
+                        const {size, color} = obj;
+                        return new Mesh(new SphereGeometry(size), new MeshBasicMaterial({color}));
+                    }}
+                    customThreeObjectUpdate={(obj, sliceData) => {
+                        const {lat, lng, altitude} = sliceData;
+                        return Object.assign(obj.position, globeRef.current?.getCoords(lat, lng, altitude));
+                    }}
+                />
+            ) : (
+                <Loading />
+            )}
         </div>
     );
 };

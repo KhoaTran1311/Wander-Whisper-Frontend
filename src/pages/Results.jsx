@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import WanderWhisperLogo from "../assets/icons/wander_whisper_logo.svg";
+import WanderWhisperLogo from "/assets/logo/wander_whisper_logo.svg";
 import Loading from "../components/Loading/Loading.jsx";
 import { useNavigate } from "react-router-dom";
 import ResultsBanner from "../components/Results/ResultsBanner.jsx";
