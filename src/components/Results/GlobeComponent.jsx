@@ -33,7 +33,7 @@ const GlobeComponent = ({ width, height }) => {
 
     const dataPoints = useMemo(() => {
         return [...pointsData, home];
-    }, [home]);
+    }, [home, pointsData]);
 
     const arcsData = useMemo(() => {
         if (!chosenCity){
@@ -59,7 +59,7 @@ const GlobeComponent = ({ width, height }) => {
                 color: ['rgb(255,255,255)', '#e1e5ff', 'rgba(255,0,0,0.9)'],
             },
         ];
-    }, [chosenCity, home]);
+    }, [chosenCity, dataPoints, home.lat, home.lng]);
 
     const ringData = useMemo(() => {
         return chosenCity ? [chosenCity] : [];
@@ -67,6 +67,13 @@ const GlobeComponent = ({ width, height }) => {
 
     useEffect(() => {
         mountedRef.current = true;
+
+        return () => {
+            mountedRef.current = false;
+        };
+    }, []);
+
+    useEffect(() => {
         fetch('/data/globe/globe.json')
             .then((res) => res.json())
             .then(setCountries);
@@ -74,11 +81,8 @@ const GlobeComponent = ({ width, height }) => {
         fetch('/data/stars/stars_3D.json')
             .then((res) => res.json())
             .then(setStars);
-
-        return () => {
-            mountedRef.current = false;
-        };
     }, []);
+
 
     useEffect(() => {
         if (!globeRef.current) return;
@@ -99,7 +103,7 @@ const GlobeComponent = ({ width, height }) => {
             { lat: chosenCity.lat, lng: chosenCity.lng, altitude: 0 },
             1500
         );
-    }, [chosenCity]);
+    }, [chosenCity, home]);
 
 
     const globeReady = () => {
@@ -153,72 +157,68 @@ const GlobeComponent = ({ width, height }) => {
                     <Loading />
                 </div>
             )}
-            {countries && stars.length ? (
-                <Globe
-                    ref={globeRef}
-                    waitForGlobeReady={true}
-                    animateIn={false}
-                    onGlobeReady={globeReady}
-                    globeOffset={[-300,0]}
-                    width={width}
-                    height={height}
-                    backgroundColor={'rgb(9,9,11,0)'}
-                    rendererConfig={{antialias: false, alpha: false}}
-                    globeMaterial={
-                        new MeshPhongMaterial({
-                            color: '#0b1229',
-                            opacity: 1,
-                            transparent: false,
-                            emissive: '#0b1229',
-                            emissiveIntensity: 0,
-                            shininess: 0.0,
-                        })
+            <Globe
+                ref={globeRef}
+                waitForGlobeReady={true}
+                animateIn={false}
+                onGlobeReady={globeReady}
+                globeOffset={[-300,0]}
+                width={width}
+                height={height}
+                backgroundColor={'rgb(9,9,11,0)'}
+                rendererConfig={{antialias: false, alpha: true}}
+                globeMaterial={
+                    new MeshPhongMaterial({
+                        color: '#0b1229',
+                        opacity: 1,
+                        transparent: false,
+                        emissive: '#0b1229',
+                        emissiveIntensity: 0,
+                        shininess: 0.0,
+                    })
+                }
+                ringsData={ringData}
+                ringMaxRadius={5}
+                ringColor={() => ringsColorFunc}
+                ringPropagationSpeed={2}
+                ringRepeatPeriod={300}
+                pointsMerge={false}
+                pointsData={dataPoints}
+                pointAltitude={0.005}
+                pointRadius={1.0}
+                pointResolution={3}
+                pointColor={(d) => {
+                    if (d.home_color) {
+                        return d.home_color;
                     }
-                    ringsData={ringData}
-                    ringMaxRadius={5}
-                    ringColor={() => ringsColorFunc}
-                    ringPropagationSpeed={2}
-                    ringRepeatPeriod={300}
-                    pointsMerge={false}
-                    pointsData={dataPoints}
-                    pointAltitude={0.005}
-                    pointRadius={1.0}
-                    pointResolution={3}
-                    pointColor={(d) => {
-                        if (d.home_color) {
-                            return d.home_color;
-                        }
-                        if (chosenCity && d.city_id !== chosenCity.city_id){
-                            return 'rgb(35,35,35)';
-                        }
-                        return 'rgb(190,0,15)';
-                    }}
-                    arcsData={arcsData}
-                    arcAltitudeAutoScale={0.3}
-                    arcColor='color'
-                    arcStroke={0.5}
-                    arcDashGap={2}
-                    arcDashAnimateTime='time'
-                    showAtmosphere={true}
-                    atmosphereColor={'#8ec5ff'}
-                    atmosphereAltitude={0.2}
-                    hexPolygonsData={countries.features}
-                    hexPolygonResolution={3}
-                    hexPolygonMargin={0.6}
-                    hexPolygonColor={() => '#00bc7d'}
-                    customLayerData={stars}
-                    customThreeObject={(obj) => {
-                        const {size, color} = obj;
-                        return new Mesh(new SphereGeometry(size), new MeshBasicMaterial({color}));
-                    }}
-                    customThreeObjectUpdate={(obj, sliceData) => {
-                        const {lat, lng, altitude} = sliceData;
-                        return Object.assign(obj.position, globeRef.current?.getCoords(lat, lng, altitude));
-                    }}
-                />
-            ) : (
-                <Loading />
-            )}
+                    if (chosenCity && d.city_id !== chosenCity.city_id){
+                        return 'rgb(35,35,35)';
+                    }
+                    return 'rgb(190,0,15)';
+                }}
+                arcsData={arcsData}
+                arcAltitudeAutoScale={0.3}
+                arcColor='color'
+                arcStroke={0.5}
+                arcDashGap={2}
+                arcDashAnimateTime='time'
+                showAtmosphere={true}
+                atmosphereColor={'#8ec5ff'}
+                atmosphereAltitude={0.2}
+                hexPolygonsData={countries.features}
+                hexPolygonResolution={3}
+                hexPolygonMargin={0.6}
+                hexPolygonColor={() => '#00bc7d'}
+                customLayerData={stars}
+                customThreeObject={(obj) => {
+                    const {size, color} = obj;
+                    return new Mesh(new SphereGeometry(size), new MeshBasicMaterial({color}));
+                }}
+                customThreeObjectUpdate={(obj, sliceData) => {
+                    const {lat, lng, altitude} = sliceData;
+                    return Object.assign(obj.position, globeRef.current?.getCoords(lat, lng, altitude));
+                }}
+            />
         </div>
     );
 };
