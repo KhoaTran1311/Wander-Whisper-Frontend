@@ -28,7 +28,6 @@ const SearchForm = () => {
             const data = await res.json();
             setPointsData(data)
             navigate("/r");
-            setIsLoading(false)
         } catch (error) {
             console.error("Error fetching data: ", error)
         }
@@ -129,7 +128,7 @@ const SearchForm = () => {
                 textareaRef.current.textContent = "";
             }
 
-    
+            setIsLoading(false)
         } catch (error) {
             console.error("Error during form submission:", error);
         }

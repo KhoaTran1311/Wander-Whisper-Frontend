@@ -100,38 +100,38 @@ const Settings = () => {
                             <span>1</span>
                         </div>
                     </div>
-                    <div className="flex justify-between  pt-3 cursor-default select-none">
-                        <div className="flex flex-col justify-between">
-                            <label className="font-medium mb-1">
-                                Number of Results
-                            </label>
-                            <p className="text-xs text-zinc-500">
-                                Number of cities to search
-                            </p>
-                        </div>
-                        <div
-                            className="flex items-center bg-zinc-300/10 rounded-md overflow-hidden shadow-xl inset-shadow-sm inset-shadow-zinc-400/50">
-                            <button
-                                disabled={settings.maxResults <= 1}
-                                onClick={() => setSettings((p) => ({...p, maxResults: p.maxResults - 1}))}
-                                className="p-2 sm:px-3 h-full cursor-pointer text-zinc-300 disabled:cursor-not-allowed"
-                            >
-                                -
-                            </button>
-                            <input
-                                type="text"
-                                value={settings.maxResults}
-                                onChange={handleNumberOfResultsChange}
-                                className="sm:w-10 w-8 text-center outline-none"
-                            />
-                            <button
-                                onClick={() => setSettings((p) => ({...p, maxResults: p.maxResults + 1}))}
-                                className="p-2 sm:px-3 h-full cursor-pointer text-zinc-300"
-                            >
-                                +
-                            </button>
-                        </div>
-                    </div>
+                    {/*<div className="flex justify-between  pt-3 cursor-default select-none">*/}
+                    {/*    <div className="flex flex-col justify-between">*/}
+                    {/*        <label className="font-medium mb-1">*/}
+                    {/*            Number of Results*/}
+                    {/*        </label>*/}
+                    {/*        <p className="text-xs text-zinc-500">*/}
+                    {/*            Number of cities to search*/}
+                    {/*        </p>*/}
+                    {/*    </div>*/}
+                    {/*    <div*/}
+                    {/*        className="flex items-center bg-zinc-300/10 rounded-md overflow-hidden shadow-xl inset-shadow-sm inset-shadow-zinc-400/50">*/}
+                    {/*        <button*/}
+                    {/*            disabled={settings.maxResults <= 1}*/}
+                    {/*            onClick={() => setSettings((p) => ({...p, maxResults: p.maxResults - 1}))}*/}
+                    {/*            className="p-2 sm:px-3 h-full cursor-pointer text-zinc-300 disabled:cursor-not-allowed"*/}
+                    {/*        >*/}
+                    {/*            -*/}
+                    {/*        </button>*/}
+                    {/*        <input*/}
+                    {/*            type="text"*/}
+                    {/*            value={settings.maxResults}*/}
+                    {/*            onChange={handleNumberOfResultsChange}*/}
+                    {/*            className="sm:w-10 w-8 text-center outline-none"*/}
+                    {/*        />*/}
+                    {/*        <button*/}
+                    {/*            onClick={() => setSettings((p) => ({...p, maxResults: p.maxResults + 1}))}*/}
+                    {/*            className="p-2 sm:px-3 h-full cursor-pointer text-zinc-300"*/}
+                    {/*        >*/}
+                    {/*            +*/}
+                    {/*        </button>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </div>
