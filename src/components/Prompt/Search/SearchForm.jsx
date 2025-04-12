@@ -106,24 +106,34 @@ const SearchForm = () => {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+    
         if (!prompt && images.length === 0)
-            return
-
-        uploadConfig()
-
-        if (images)
-            uploadImages()
-        if (prompt)
-            uploadPrompt()
-
-        fetchData()
-        resetMedia()
-        if (textareaRef.current) {
-            textareaRef.current.textContent = "";
+            return;
+    
+        try {
+            setIsLoading(true)
+            await uploadConfig();
+            if (images.length > 0) {
+                await uploadImages();
+            }
+            if (prompt) {
+                await uploadPrompt();
+            }
+            await fetchData();
+            setIsLoading(false)
+    
+            resetMedia();
+            if (textareaRef.current) {
+                textareaRef.current.textContent = "";
+            }
+    
+            navigate("/r");
+    
+        } catch (error) {
+            console.error("Error during form submission:", error);
         }
-        navigate("/r");
     }
 
     const handleOnKeyDown = (e) => {
