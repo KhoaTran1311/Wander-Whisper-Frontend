@@ -24,10 +24,10 @@ const SearchForm = () => {
 
     const fetchData = async () => {
         try {
-            setIsLoading(true)
             const res = await fetch("http://127.0.0.1:8000/api/find_recommended_cities/");
             const data = await res.json();
             setPointsData(data)
+            navigate("/r");
             setIsLoading(false)
         } catch (error) {
             console.error("Error fetching data: ", error)
@@ -122,14 +122,13 @@ const SearchForm = () => {
                 await uploadPrompt();
             }
             await fetchData();
-            setIsLoading(false)
+            
     
             resetMedia();
             if (textareaRef.current) {
                 textareaRef.current.textContent = "";
             }
-    
-            navigate("/r");
+
     
         } catch (error) {
             console.error("Error during form submission:", error);
